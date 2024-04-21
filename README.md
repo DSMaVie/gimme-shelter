@@ -1,14 +1,10 @@
 # gimme-shelter
 
-[![PyPI - Version](https://img.shields.io/pypi/v/gimme-shelter.svg)](https://pypi.org/project/gimme-shelter)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/gimme-shelter.svg)](https://pypi.org/project/gimme-shelter)
+Gimme Shelter is a Webserver application using `streamlit` that asks an LLM to write a personalized letter to the landlord of a free apartment in Berlin, if the user provides it with some information about the apartment.
 
------
-
-**Table of Contents**
-
-- [Installation](#installation)
-- [License](#license)
+- [gimme-shelter](#gimme-shelter)
+  - [Installation](#installation)
+  - [License](#license)
 
 ## Installation
 

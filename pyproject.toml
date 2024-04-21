@@ -5,59 +5,42 @@ build-backend = "hatchling.build"
 [project]
 name = "gimme-shelter"
 dynamic = ["version"]
-description = ''
+description = 'Webtool that uses LLM to write inquiries about free flats in Berlin.'
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 license = "MIT"
-keywords = []
-authors = [
-  { name = "Max Vieweg", email = "max.vieweg@outlook.com" },
-]
+keywords = ["AI", "LLM", "Stramlit"]
+authors = [{ name = "Max Vieweg", email = "max.vieweg@outlook.com" }]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = ["streamlit", "aleph-alpha-client"]
 
 [project.urls]
-Documentation = "https://github.com/unknown/gimme-shelter#readme"
-Issues = "https://github.com/unknown/gimme-shelter/issues"
-Source = "https://github.com/unknown/gimme-shelter"
+Documentation = "https://github.com/DSMaVie/gimme-shelter#readme"
+Issues = "https://github.com/DSMaVie/gimme-shelter/issues"
+Source = "https://github.com/DSMaVie/gimme-shelter"
 
 [tool.hatch.version]
 path = "src/gimme_shelter/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = [
-  "coverage[toml]>=6.5",
-  "pytest",
-]
+python = "3.12"
+dependencies = ["coverage[toml]>=6.5", "pytest"]
+
 [tool.hatch.envs.default.scripts]
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
-
-[[tool.hatch.envs.all.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
+serve = ["streamlit", "src/gimme_shelter/sever.py"]
 
 [tool.hatch.envs.types]
-dependencies = [
-  "mypy>=1.0.0",
-]
+dependencies = ["mypy>=1.0.0"]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/gimme_shelter tests}"
 
@@ -65,17 +48,15 @@ check = "mypy --install-types --non-interactive {args:src/gimme_shelter tests}"
 source_pkgs = ["gimme_shelter", "tests"]
 branch = true
 parallel = true
-omit = [
-  "src/gimme_shelter/__about__.py",
-]
+omit = ["src/gimme_shelter/__about__.py"]
 
 [tool.coverage.paths]
 gimme_shelter = ["src/gimme_shelter", "*/gimme-shelter/src/gimme_shelter"]
 tests = ["tests", "*/gimme-shelter/tests"]
 
 [tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["E501"]
