@@ -1,16 +1,34 @@
 # gimme-shelter
 
-Gimme Shelter is a Webserver application using `streamlit` that asks an LLM to write a personalized letter to the landlord of a free apartment in Berlin, if the user provides it with some information about the apartment.
+Gimme Shelter is a Demo server app using `streamlit` that asks an LLM to write a personalized letter to the landlord of a free apartment in Berlin, if the user provides it with some information about the apartment.
 
 - [gimme-shelter](#gimme-shelter)
-  - [Installation](#installation)
+  - [Develop](#develop)
+  - [Build](#build)
   - [License](#license)
 
-## Installation
+## Develop
+
+Its easiest to use `hatch` as project manager for developemnt and so on. To start the dev server you can just run
 
 ```console
-pip install gimme-shelter
+hatch run serve
 ```
+
+from the project root.
+
+## Build
+
+This becomes a bit more tricky. First you need to build with hatch, the generate a requirements.txt for docker
+and build the docker image.
+
+```console
+hatch build -t sdist
+hatch show deps requirements.txt > dist
+docker build -t [SOME TAG] -n gimme-shelter
+```
+
+A demo if this container is hosted on [fly.io](fly.io).
 
 ## License
 

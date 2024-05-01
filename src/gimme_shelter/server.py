@@ -2,15 +2,24 @@
 
 import streamlit as st
 
-from gimme_shelter.request import AARequester
+from gimme_shelter.client import produce_client
+from gimme_shelter.prompt import prompt
 
-aa_requester = AARequester()
+options = "AlephAlpha-Luminous"
+
+# sidebar
+with st.sidebar:
+    model_selection = st.radio("Select Model", options=options)
+    # TODO(Max): make radio and captions based on Enums
+
+    model_client = produce_client(model_selection)
 
 
 st.title("Gimme Shelter!", divider="rainbow")
+st.caption(f"Model: {model_selection}")
 st.write(
     "Diese App schreibt dir, aus Wohnungsanzeigen,"
-    " Anschreiben fuer den jeweiligen Vermieter.",
+    " Anschreiben für den jeweiligen Vermieter.",
 )
 
 with st.form(key="input"):
@@ -18,11 +27,10 @@ with st.form(key="input"):
     input_anzeige = st.text_area(
         "Am besten Copy&Paste der Anzeige.",
     )
-    is_submitted = st.form_submit_button("Generiere Anschreiben", on_click=aa_requester)
+    is_submitted = st.form_submit_button("Generiere Anschreiben")
 
 
 if is_submitted:
-    while response := aa_requester.response is None:
-        st.spinner("Generiere Anschreiben")
-
+    compiled_prompt = prompt()
+    response = model_client.request(compiled_prompt)
     st.text(response)

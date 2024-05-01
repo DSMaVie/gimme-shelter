@@ -28,35 +28,9 @@ Source = "https://github.com/DSMaVie/gimme-shelter"
 [tool.hatch.version]
 path = "src/gimme_shelter/__about__.py"
 
-[tool.hatch.envs.default]
-python = "3.12"
-dependencies = ["coverage[toml]>=6.5", "pytest"]
-
-[tool.hatch.envs.default.scripts]
-test = "pytest {args:tests}"
-test-cov = "coverage run -m pytest {args:tests}"
-cov-report = ["- coverage combine", "coverage report"]
-cov = ["test-cov", "cov-report"]
+[tool.hatch.scripts]
 serve = ["streamlit", "src/gimme_shelter/sever.py"]
-
-[tool.hatch.envs.types]
-dependencies = ["mypy>=1.0.0"]
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/gimme_shelter tests}"
-
-[tool.coverage.run]
-source_pkgs = ["gimme_shelter", "tests"]
-branch = true
-parallel = true
-omit = ["src/gimme_shelter/__about__.py"]
-
-[tool.coverage.paths]
-gimme_shelter = ["src/gimme_shelter", "*/gimme-shelter/src/gimme_shelter"]
-tests = ["tests", "*/gimme-shelter/tests"]
-
-[tool.coverage.report]
-exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["E501"]
+ignore = ["E501", "TD003"]

@@ -6,6 +6,13 @@ from typing import Self
 
 from aleph_alpha_client import Client, CompletionRequest, Prompt
 
+from gimme_shelter.interfaces import GenAIClient
+
+
+def produce_client(selection: str) -> GenAIClient:
+    """Select the correct model from an input selection string."""
+    raise NotImplementedError
+
 
 class AAModel(StrEnum):
     """Enumeration of AA models."""
@@ -50,16 +57,16 @@ class AARequester:
 
         self.response: str | None = None
 
-    def get_response(self: Self, input_text: str) -> None:
+    def request(self: Self, prompt: str) -> None:
         """Send a request to the AA API and get the response.
 
         Args:
         ----
-            input_text (str): The input text for the request.
+            prompt (str): The input text for the request.
 
         """
         request = CompletionRequest(
-            prompt=Prompt.from_text(input_text),
+            prompt=Prompt.from_text(prompt),
             maximum_tokens=self.max_tokens,
         )
         response = self._client.complete(request=request, model=self._model)
