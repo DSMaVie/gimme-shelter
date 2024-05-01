@@ -9,7 +9,7 @@ Gimme Shelter is a Demo server app using `streamlit` that asks an LLM to write a
 
 ## Develop
 
-Its easiest to use `hatch` as project manager for developemnt and so on. To start the dev server you can just run
+Its easiest to use [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch) as project manager for developemnt and so on. To start the dev server you can just run
 
 ```console
 hatch run serve

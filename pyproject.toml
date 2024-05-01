@@ -28,8 +28,8 @@ Source = "https://github.com/DSMaVie/gimme-shelter"
 [tool.hatch.version]
 path = "src/gimme_shelter/__about__.py"
 
-[tool.hatch.scripts]
-serve = ["streamlit", "src/gimme_shelter/sever.py"]
+[tool.hatch.envs.default.scripts]
+serve = ["streamlit", "run, "src/gimme_shelter/server.py"]
 
 [tool.ruff.lint]
 select = ["ALL"]
