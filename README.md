@@ -19,16 +19,12 @@ from the project root.
 
 ## Build
 
-This becomes a bit more tricky. First you need to build with hatch, the generate a requirements.txt for docker
-and build the docker image.
+This becomes a bit more tricky. First you need to extract the dependencies, and then deploy with [fly.io](fly.io).
 
 ```console
-hatch build -t sdist
-hatch show deps requirements.txt > dist
-docker build -t [SOME TAG] -n gimme-shelter
+hatch dep show requirements > requirements.txt
+fly deploy --local-only
 ```
-
-A demo if this container is hosted on [fly.io](fly.io).
 
 ## License
 

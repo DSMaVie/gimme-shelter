@@ -1,2 +1,5 @@
 .env
 .direnv
+.streamlit/secrets.toml
+__pycache__
+sdist

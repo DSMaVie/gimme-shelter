@@ -1,0 +1,15 @@
+# flyctl launch added from .direnv/.gitignore
+# This file was automatically created by Hatch
+.direnv/**/*
+
+# flyctl launch added from .direnv/gimme-shelter/.gitignore
+# created by virtualenv automatically
+.direnv/gimme-shelter/**/*
+
+# flyctl launch added from .gitignore
+**/.env
+**/.direnv
+**/.streamlit/secrets.toml
+**/__pycache__
+**/sdist
+fly.toml
