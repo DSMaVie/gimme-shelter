@@ -5,6 +5,7 @@ Gimme Shelter is a Demo server app using `streamlit` that asks an LLM to write a
 - [gimme-shelter](#gimme-shelter)
   - [Develop](#develop)
   - [Build](#build)
+  - [Example](#example)
   - [License](#license)
 
 ## Develop
@@ -19,12 +20,19 @@ from the project root.
 
 ## Build
 
-This becomes a bit more tricky. First you need to extract the dependencies, and then deploy with [fly.io](fly.io).
+This becomes a bit more tricky. First you need to extract the dependencies and build the wheel, and then deploy with [fly.io](fly.io).
 
 ```console
 hatch dep show requirements > requirements.txt
-fly deploy --local-only
+hatch build
+fly launch --local-only -y
+fly scale count 1
+cat .env | fly secrets import
 ```
+
+## Example
+
+A running Example should be available under [gimme-shelter.fly.dev](gimme-shelter.fly.dev)
 
 ## License
 

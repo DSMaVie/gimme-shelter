@@ -109,7 +109,7 @@ class AAClient:
         self: Self,
         model: ModelInfo,
         token: str,
-        max_tokens: int = 100,
+        max_tokens: int = 500,
     ) -> None:
         """Initialize a new instance of the AAClient class.
 
@@ -123,9 +123,8 @@ class AAClient:
         self._client = Client(token=token)
         self.model = model
         self._max_tokens = max_tokens
-        self.response: str | None = None
 
-    def request(self: Self, prompt: str) -> None:
+    def request(self: Self, prompt: str) -> str:
         """Send a request to the AA API and get the response.
 
         Args:
@@ -137,5 +136,11 @@ class AAClient:
             prompt=Prompt.from_text(prompt),
             maximum_tokens=self._max_tokens,
         )
-        response = self._client.complete(request=request, model=self.model.id_name)
-        self.response = response.completions[0].completion
+        return (
+            self._client.complete(
+                request=request,
+                model=self.model.id_name,
+            )
+            .completions[0]
+            .completion
+        )

@@ -18,7 +18,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["streamlit", "aleph-alpha-client"]
+dependencies = ["streamlit", "aleph-alpha-client", "python-dotenv"]
 
 [project.urls]
 Documentation = "https://github.com/DSMaVie/gimme-shelter#readme"

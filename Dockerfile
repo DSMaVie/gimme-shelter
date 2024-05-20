@@ -9,13 +9,15 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . .
 COPY ./requirements.txt .
+RUN pip install -r requirements.txt --no-cache-dir
 
-RUN pip install -r requirements.txt
-RUN pip install .
+
+COPY ./dist/gimme_shelter-0.0.1-py3-none-any.whl .
+RUN pip install gimme_shelter-0.0.1-py3-none-any.whl --no-cache-dir
+
+COPY src/gimme_shelter/server.py .
+
 EXPOSE 8501
-
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
-
-ENTRYPOINT ["streamlit", "run", "src/gimme_shelter/server.py", "--server.port=8501"]
+ENTRYPOINT ["streamlit", "run", "server.py", "--server.port=8501"]
